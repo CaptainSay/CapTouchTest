@@ -19,7 +19,7 @@
 struct Element* modePtr;
 struct Element* buttonPtr;
 
-/**
+/*
  * BinaryModes - function containing the extra binary mode button functions and effects
  */
 void BinaryModes(void)
@@ -629,6 +629,4 @@ void BinaryModes(void)
 		break;
 	};	/* switch(CapTouch_mode) */
 }
-
-
 #endif /* EXTRAMODES_C_ */

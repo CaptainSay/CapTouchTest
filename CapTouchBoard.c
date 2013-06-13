@@ -28,7 +28,7 @@ static uint16_t repeatModeEnabled = 0;		// Allow the mode button to be held down
 static uint16_t	modePressCounter = 0;		// Counts the number of mode button samples
 static uint8_t 	modeIncrementOk = 1; 	    // Flag if the mode can be incremented
 
-/**
+/*
  * CapTouch_Init - Initialization settings for captouch evaluation board
  */
 void CapTouch_Init(void)
@@ -43,8 +43,7 @@ void CapTouch_Init(void)
 	TI_CAPT_Update_Baseline(&mode_change,5);	// Measure mode buttons capacitance 5x times and average, this tracks changing capacitance
 	TI_CAPT_Update_Baseline(&buttons,5);		// Measure effect buttons capacitance 5x times and average, this tracks changing capacitance
 }
-
-/**
+/*
  * CapTouch_PowerUpSequence - visual startup sequence for the evaluation board
  */
 void CapTouch_PowerUpSequence(void)
@@ -61,8 +60,7 @@ void CapTouch_PowerUpSequence(void)
 
 	CapTouch_ButtonLEDOffSequence();
 }
-
-/**
+/*
  * CapTouch_IncrementMode - increase the board mode (binary or carousel)
  */
 void CapTouch_IncrementMode(void)
@@ -78,8 +76,7 @@ void CapTouch_IncrementMode(void)
 		Haptics_SendWaveform(lra_tick);
 	}
 }
-
-/**
+/*
  * CapTouch_DecrementMode - decrease the board mode (binary or carousel)
  */
 void CapTouch_DecrementMode(void)
@@ -95,8 +92,7 @@ void CapTouch_DecrementMode(void)
 		Haptics_SendWaveform(lra_tick);
 	}
 }
-
-/**
+/*
  * CapTouch_SetBinaryMode - set the mode counter to binary format
  */
 void CapTouch_SetBinaryMode()
@@ -109,8 +105,7 @@ void CapTouch_SetBinaryMode()
 	Haptics_SendWaveform(lra_click);
 	Haptics_OutputEnableSet(0);
 }
-
-/**
+/*
  * CapTouch_SetBinaryMode - set the mode counter to carousel format
  */
 void CapTouch_UnsetBinaryMode()
@@ -123,8 +118,7 @@ void CapTouch_UnsetBinaryMode()
 	Haptics_SendWaveform(lra_click);
 	Haptics_OutputEnableSet(0);
 }
-
-/**
+/*
  * CapTouch_IncrementMode - increase the board mode (6 modes)
  */
 void CapTouch_IncrementModeCarousel(void)
@@ -134,8 +128,7 @@ void CapTouch_IncrementModeCarousel(void)
 	else
 	  CapTouch_mode = CapTouch_mode >> 1;
 }
-
-/**
+/*
  * CapTouch_DecrementMode - decrease the board mode (6 modes)
  */
 void CapTouch_DecrementModeCarousel(void)
@@ -147,8 +140,7 @@ void CapTouch_DecrementModeCarousel(void)
 	else
 	  CapTouch_mode = CapTouch_mode << 1;
 }
-
-/**
+/*
  * IncrementModeBode - increase the board mode (32 modes)
  */
 void CapTouch_IncrementModeBinary(void)
@@ -159,7 +151,7 @@ void CapTouch_IncrementModeBinary(void)
 		CapTouch_mode = CapTouch_mode + MODE_OFFSET;
 }
 
-/**
+/*
  * DecrementModeBinary - decrease the board mode (32 modes)
  */
 void CapTouch_DecrementModeBinary(void)
@@ -169,8 +161,7 @@ void CapTouch_DecrementModeBinary(void)
 	else
 		CapTouch_mode = CapTouch_mode - 1;
 }
-
-/**
+/*
  * CapTouch_ModeLEDBinary - display binary on the mode LEDs
  * @param unsigned char number - number to be displayed
  */
@@ -178,40 +169,35 @@ void CapTouch_ModeLEDBinary(uint8_t number)
 {
 	P3OUT |= (number << 3);
 }
-
-/**
+/*
  * CapTouch_ButtonLEDsOn - turn all button LEDs on
  */
 void CapTouch_ButtonLEDsOn(void)
 {
 	P1OUT |= 0x0F;			// turn on button LEDs
 }
-
-/**
+/*
  * CapTouch_ButtonLEDsOff - turn all button LEDs off
  */
 void CapTouch_ButtonLEDsOff(void)
 {
 	P1OUT &= 0xF0;			// turn off button LEDs
 }
-
-/**
+/*
  * CapTouch_ModeLEDsOn - turn all mode LEDs on
  */
 void CapTouch_ModeLEDsOn(void)
 {
 	P3OUT |= (0xF8);		// turn on mode LEDs
 }
-
-/**
+/*
  * CapTouch_ModeLEDsOff - turn all mode LEDs off
  */
 void CapTouch_ModeLEDsOff(void)
 {
 	P3OUT &= 0x07;			// turn off mode LEDs
 }
-
-/**
+/*
  * CapTouch_FlashButtonLEDs - flash all button LEDs x times
  * @param unsigned int numberOfBlinks - number of flashes
  */
@@ -231,8 +217,7 @@ void CapTouch_FlashButtonLEDs(unsigned int numberOfBlinks)
 		sleep(LEDBLINKDELAY);
 	}
 }
-
-/**
+/*
  * CapTouch_FlashModeLEDs - flash all mode LEDs x times
  * @param unsigned int numberOfBlinks - number of flashes
  */
@@ -251,10 +236,8 @@ void CapTouch_FlashModeLEDs(unsigned int numberOfBlinks)
 		P3OUT &= 0x07;						// turn off mode LEDs
 		sleep(LEDBLINKDELAY);
 	}
-
 }
-
-/**
+/*
  * CapTouch_ButtonLEDOnSequence - turn on LEDS from B1->B2->B3->B4
  */
 void CapTouch_ButtonLEDOnSequence(void)
@@ -268,8 +251,7 @@ void CapTouch_ButtonLEDOnSequence(void)
 	P1OUT |= (BUTTON4);								// turn on LED B4
 	sleep(LEDBLINKDELAY);
 }
-
-/**
+/*
  * CapTouch_ButtonLEDOffSequence - turn on LEDS from B1<-B2<-B3<-B4
  */
 void CapTouch_ButtonLEDOffSequence(void)
@@ -282,8 +264,7 @@ void CapTouch_ButtonLEDOffSequence(void)
 	sleep(LEDBLINKDELAY);
 	P1OUT &= ~(BUTTON1);							// turn off LED B1
 }
-
-/**
+/*
  * CapTouch_ModeLEDsScroll - scroll the mode LEDs to the right
  * 		Note: does not affect the current CapTouch_mode variable
  * @param unsigned int numberOfScolls - number of shifts from left to right
@@ -305,7 +286,6 @@ void CapTouch_ModeLEDsScroll(unsigned int numberOfScrolls)
 	P3OUT &= ~(MODE4+MODE2);
 	P3OUT |= (MODE3+MODE1);
 	sleep(LEDBLINKDELAY);
-
 
 	for(i = 0; i < numberOfScrolls; i++)
 	{
@@ -332,16 +312,14 @@ void CapTouch_ModeLEDsScroll(unsigned int numberOfScrolls)
 
 	P3OUT &= ~MODE0;
 }
-
-/**
+/*
  * CapTouch_RepeatOnHold - repeat the effect when button is held
  */
 void CapTouch_RepeatOnHold(void)
 {
 	CapTouch_isEffectBtnReleased = 1;		// indicate the button has been released
 }
-
-/**
+/*
  * CapTouch_RepeatOnHoldWait - hold button and wait X ms before playing repeat waveform
  */
 void CapTouch_RepeatOnHoldWait(void)
@@ -360,8 +338,7 @@ void CapTouch_RepeatOnHoldWait(void)
 		}
 	}
 }
-
-/**
+/*
  * CapTouch_EnableOnHold - hold a button to call a function
  * @param action - pointer to function to be called after hold
  */
@@ -384,15 +361,13 @@ void CapTouch_EnableOnHold(void (*action)())
 		}
 	}
 }
-
-/**
+/*
  * CapTouch_FreezeLEDs - freeze the current state of the LEDs
  */
 void CapTouch_FreezeLEDs(void)
 {
 	CapTouch_isLEDFrozen = 1;
 }
-
 /**
  * CapTouch_UnfreezeLEDs - unfreeze the current state of the LEDs
  */
@@ -400,7 +375,6 @@ void CapTouch_UnfreezeLEDs(void)
 {
 	CapTouch_isLEDFrozen = 0;
 }
-
 /**
  * CapTouch_RepeatReset - to be called in main loop when button is released
  */
@@ -410,7 +384,6 @@ void CapTouch_RepeatReset(void)
 	buttonPressCounter = 0;
 	Haptics_OutputEnableSet(1);
 }
-
 /**
  * CapTouch_ModeRepeatReset - to be called in main loop when a mode button is released
  */
@@ -421,6 +394,3 @@ void CapTouch_ModeRepeatReset(void)
 	modeIncrementOk = 1;
 	//Haptics_OutputEnableSet(1);
 }
-
-
-
