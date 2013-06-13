@@ -2,8 +2,14 @@
 #include "CapTouchBoard.h"
 #include "Actuator_Waveforms.h"
 #include "BinaryModes.h"
+#include "Test.h"
 #include <string.h>
 #include <math.h>
+
+/**
+ * Lindsay Insco
+ * Visteon Intern
+ */
 
 /**********CONSTANTS**********/
 #define SCROLL 250
@@ -74,55 +80,9 @@ int main(void)
 
   CapTouch_Init();
   Haptics_Init();
+  //These will engage just fine
  // CapTouch_PowerUpSequence();
   Haptics_SendWaveform(erm_rampup);
-
- /* while(1)
-  {
-	  __bis_SR_register(GIE);
-
-	  //__low_power_mode_0(); // Interrupts enabled
-
-	  /*if(character && character != '\r')
-	  {
-		  //Haptics_SendWaveform(erm_rampup);
-		  write(character); //echo
-
-		  if(character == 'a')
-		  {
-			  Haptics_SendWaveform(erm_rampup);
-		  }*/
-
-		  //character = 0x00;   //  <---  here
-
-		  /*if(character != '\b')
-		  {
-			  buffer[iterator] = character;
-			  iterator++;
-		  }*/
-	  /*for(i = 0; i < 1; i++)
-	  {
-		  write(character);
-	  }*/
-/*	  getc(character);
-	  write(character);
-	 switch(character)
-	 {
-	 case 'a':
-	 {
-		 //Haptics_SendWaveform(lra_rampup);
-		 printf(" YOU PRESSED 'a'!\r\n");
-		 break;
-	 }
-	 case 'b':
-	 {
-		printf(" 2YOU PRESSED 'b'! \r\n");
-		break;
-	 }
-	 }
-
-	  character = 0x00;
-  }*/
 
   for(;;)
   {
@@ -131,9 +91,13 @@ int main(void)
 	  if(character == 'a')
 	  {
 		  printf(" Successfully pressed 'a'! \r\n");
-		  Haptics_SendWaveform(erm_rampup);
+
+		  //THIS IS WHERE THINGS BREAK
+		  //Haptics_SendWaveform(erm_rampup);
+		  Test();
 	  }
 	  character = 0x00;
+	  //This works just fine
 	  //Haptics_SendWaveform(erm_rampup);
   }
 }
